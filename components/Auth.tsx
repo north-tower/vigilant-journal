@@ -3,6 +3,7 @@ import { Alert, StyleSheet, View, AppState } from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input } from '@rneui/themed'
 import But from './But'
+import { Appbar } from 'react-native-paper';
 
 
 // Tells Supabase Auth to continuously refresh the session automatically if
@@ -50,6 +51,9 @@ export default function Auth() {
 
   return (
     <View style={styles.container}>
+      <Appbar.Header>
+       <Appbar.Content title="Title" theme={{ colors: { primary: 'green' } }} />
+    </Appbar.Header>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input
           label="Email"
