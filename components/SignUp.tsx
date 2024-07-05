@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, AppState, Alert, TextInput } from 'react-native';
 import tw from 'twrnc';
 import { supabase } from '../lib/supabase';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from './StackNavigator';
 
 AppState.addEventListener('change', (state) => {
   if (state === 'active') {
@@ -15,6 +17,8 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
 
   async function signInWithEmail() {
     setLoading(true);
@@ -82,8 +86,14 @@ function SignUp() {
       </TouchableOpacity>
       <Text>
        Have an account?
-        <Text style={tw`whitespace-nowrap font-medium text-gray-900 hover:underline`}>
-          Sign In</Text>
+       <TouchableOpacity
+          onPress={() => navigation.navigate('Signin')}
+          style={tw`shadow`}
+        >
+          <Text style={tw`whitespace-nowrap font-medium text-gray-900 hover:underline`}>
+            Sign In
+          </Text>
+        </TouchableOpacity>
       </Text>
     </View>
   );

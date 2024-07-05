@@ -81,7 +81,7 @@ function But() {
       <Text>
         New to the app?{' '}
         <TouchableOpacity
-          onPress={() => navigation.navigate('SignUp')}
+          onPress={() => navigation.navigate('Signup')}
           style={tw`shadow`}
         >
           <Text style={tw`whitespace-nowrap font-medium text-gray-900 hover:underline`}>

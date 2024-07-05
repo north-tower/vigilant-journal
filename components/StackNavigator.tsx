@@ -10,7 +10,8 @@ import SignUp from './SignUp';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
-    SignUp: undefined;
+    Signup: undefined;
+    Signin: undefined;
   };
 
 
@@ -43,7 +44,7 @@ const StackNavigator = () => {
         />
       ) : (
         <>
-        <Stack.Screen name="But" component={But} options={{
+        <Stack.Screen name="Signin" component={But} options={{
             headerShown: false,
           }} />
           <Stack.Screen name="Signup" component={SignUp} options={{
