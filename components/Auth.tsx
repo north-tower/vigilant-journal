@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View, AppState } from 'react-native'
+import { Alert, StyleSheet, View, AppState , Text} from 'react-native'
 import { supabase } from '../lib/supabase'
 import { Button, Input } from '@rneui/themed'
-import But from './But'
-import { Appbar } from 'react-native-paper';
+import tw from 'twrnc';
+import But from './But';
 
 
 // Tells Supabase Auth to continuously refresh the session automatically if
@@ -51,9 +51,7 @@ export default function Auth() {
 
   return (
     <View style={styles.container}>
-      <Appbar.Header>
-       <Appbar.Content title="Title" theme={{ colors: { primary: 'green' } }} />
-    </Appbar.Header>
+      
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Input
           label="Email"
@@ -81,7 +79,10 @@ export default function Auth() {
       <View style={styles.verticallySpaced}>
         <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
       </View>
-<But />
+      <View style={tw`p-4 android:pt-2 bg-white dark:bg-black`}>
+    <Text style={tw`text-md text-red-800 dark:text-white`}>Hello World</Text>
+  </View>
+  <But />
     </View>
   )
 }

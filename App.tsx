@@ -5,6 +5,7 @@ import Account from './components/Account'
 import { View } from 'react-native'
 import { Session } from '@supabase/supabase-js'
 import { PaperProvider } from 'react-native-paper';
+import But from './components/But'
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -22,7 +23,9 @@ export default function App() {
   return (
     <PaperProvider>
       <View>
-        {session && session.user ? <Account key={session.user.id} session={session} /> : <Auth />}
+        {session && session.user ?
+         <Account key={session.user.id} 
+         session={session} /> : <But />}
       </View>
     </PaperProvider>
   )
