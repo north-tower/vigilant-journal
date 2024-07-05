@@ -54,10 +54,16 @@ function SignUp() {
           <Text style={tw`font-medium text-blue-600 hover:underline`}>Log in</Text>
         </Text> */}
       </View>
-      <Text style={tw`mb-5 text-lg font-medium`}>  Welcome Back to Your Personal Journal</Text>
+      <Text style={tw`mb-5 text-lg font-medium`}>  
+
+      Join Our Journal Community
+
+      </Text>
       <Text style={tw`mb-6 text-sm`}>
-    
-      Record your thoughts, capture your memories, and keep track of your daily experiences. Log in to continue your journey of self-reflection and growth.
+Start your journey of self-discovery and personal growth. Create an account to begin 
+documenting your thoughts, memories, and daily experiences. Your story starts here!
+
+
       </Text>
       <View style={tw`mb-6`}>
         <View style={tw`focus-within:border-b-blue-500 relative mb-3 flex overflow-hidden border-b-2 transition`}>
