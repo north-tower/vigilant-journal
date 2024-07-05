@@ -6,6 +6,13 @@ import { supabase } from '../lib/supabase';
 import Account from './Account';
 
 import But from './But';
+import SignUp from './SignUp';
+
+export type RootStackParamList = {
+    Account: { session: Session | null };
+    SignUp: undefined;
+  };
+
 
 
 const Stack = createNativeStackNavigator();
@@ -35,7 +42,15 @@ const StackNavigator = () => {
           }}
         />
       ) : (
-        <Stack.Screen name="But" component={But} />
+        <>
+        <Stack.Screen name="But" component={But} options={{
+            headerShown: false,
+          }} />
+          <Stack.Screen name="Signup" component={SignUp} options={{
+            headerShown: false,
+          }} />
+        </>
+        
       )}
     </Stack.Navigator>
   );
