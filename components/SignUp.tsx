@@ -19,18 +19,6 @@ function SignUp() {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-
-  async function signInWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
-    setLoading(false);
-  }
-
   async function signUpWithEmail() {
     setLoading(true);
     const { data: { session }, error } = await supabase.auth.signUp({
@@ -38,9 +26,14 @@ function SignUp() {
       password: password,
     });
 
-    if (error) Alert.alert(error.message);
-    if (!session) Alert.alert('Please check your inbox for email verification!');
-    setLoading(false);
+    if (error) {
+      Alert.alert(error.message);
+      setLoading(false);
+    } else {
+      
+        Alert.alert('Please check your inbox for email verification!');
+        navigation.navigate('Success');
+    }
   }
 
   return (
@@ -49,21 +42,11 @@ function SignUp() {
         <Text style={tw`font-bold`}>
           <View style={tw`inline-block h-3 w-3 bg-blue-600`}></View> Journal
         </Text>
-        {/* <Text>
-          Have account?{' '}
-          <Text style={tw`font-medium text-blue-600 hover:underline`}>Log in</Text>
-        </Text> */}
       </View>
-      <Text style={tw`mb-5 text-lg font-medium`}>  
-
-      Join Our Journal Community
-
-      </Text>
+      <Text style={tw`mb-5 text-lg font-medium`}>Join Our Journal Community</Text>
       <Text style={tw`mb-6 text-sm`}>
-Start your journey of self-discovery and personal growth. Create an account to begin 
-documenting your thoughts, memories, and daily experiences. Your story starts here!
-
-
+        Start your journey of self-discovery and personal growth. Create an account to begin
+        documenting your thoughts, memories, and daily experiences. Your story starts here!
       </Text>
       <View style={tw`mb-6`}>
         <View style={tw`focus-within:border-b-blue-500 relative mb-3 flex overflow-hidden border-b-2 transition`}>
@@ -87,25 +70,16 @@ documenting your thoughts, memories, and daily experiences. Your story starts he
           />
         </View>
       </View>
-      <TouchableOpacity disabled={loading} onPress={() => signUpWithEmail()} style={tw`mb-6 rounded-xl bg-blue-600 px-8 py-3`}>
-      {loading ? (
+      <TouchableOpacity disabled={loading} onPress={signUpWithEmail} style={tw`mb-6 rounded-xl bg-blue-600 px-8 py-3`}>
+        {loading ? (
           <ActivityIndicator size="large" color="#0000ff" />
-
-          ) : (
-            <>
-        <Text style={tw`font-medium text-white text-center`}>Sign Up</Text>
-              
-            </>
-          )}
-      
-      
+        ) : (
+          <Text style={tw`font-medium text-white text-center`}>Sign Up</Text>
+        )}
       </TouchableOpacity>
       <Text>
-       Have an account?
-       <TouchableOpacity
-          onPress={() => navigation.navigate('Signin')}
-          style={tw`shadow`}
-        >
+        Have an account?{' '}
+        <TouchableOpacity onPress={() => navigation.navigate('Signin')} style={tw`shadow`}>
           <Text style={tw`whitespace-nowrap font-medium text-gray-900 hover:underline`}>
             Sign In
           </Text>

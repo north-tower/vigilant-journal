@@ -7,11 +7,13 @@ import Account from './Account';
 
 import But from './But';
 import SignUp from './SignUp';
+import Success from './Success';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
     Signup: undefined;
     Signin: undefined;
+    Success: undefined;
   };
 
 
@@ -50,6 +52,7 @@ const StackNavigator = () => {
           <Stack.Screen name="Signup" component={SignUp} options={{
             headerShown: false,
           }} />
+           <Stack.Screen name="Success" component={Success} />
         </>
         
       )}
