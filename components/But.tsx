@@ -41,7 +41,7 @@ function But() {
 
   return (
     <View style={tw`mx-auto my-10 max-w-md rounded-xl border px-4 py-10 bg-white shadow-lg sm:px-8`}>
-      <View style={tw`mb-16 flex justify-between`}>
+      <View style={tw`mb-8 flex justify-between`}>
         <Text style={tw`font-bold`}>
           <View style={tw`inline-block h-3 w-3 bg-blue-600`}></View> Journal
         </Text>
@@ -50,9 +50,10 @@ function But() {
           <Text style={tw`font-medium text-blue-600 hover:underline`}>Log in</Text>
         </Text> */}
       </View>
-      <Text style={tw`mb-5 text-3xl font-medium`}>Manage your produce business us!</Text>
+      <Text style={tw`mb-5 text-lg font-medium`}>  Welcome Back to Your Personal Journal</Text>
       <Text style={tw`mb-6 text-sm`}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet culpa corrupti praesentium?
+    
+      Record your thoughts, capture your memories, and keep track of your daily experiences. Log in to continue your journey of self-reflection and growth.
       </Text>
       <View style={tw`mb-6`}>
         <View style={tw`focus-within:border-b-blue-500 relative mb-3 flex overflow-hidden border-b-2 transition`}>
@@ -77,12 +78,12 @@ function But() {
         </View>
       </View>
       <TouchableOpacity disabled={loading} onPress={() => signInWithEmail()} style={tw`mb-6 rounded-xl bg-blue-600 px-8 py-3`}>
-        <Text style={tw`font-medium text-white text-center`}>Get Started</Text>
+        <Text style={tw`font-medium text-white text-center`}>Log in</Text>
       </TouchableOpacity>
-      <Text>
+      {/* <Text>
         By signing up you are agreeing to our{' '}
         <Text style={tw`whitespace-nowrap font-medium text-gray-900 hover:underline`}>Terms and Conditions</Text>
-      </Text>
+      </Text> */}
     </View>
   );
 }
