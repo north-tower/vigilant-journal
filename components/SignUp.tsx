@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, AppState, Alert, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, AppState, Alert, TextInput, ActivityIndicator } from 'react-native';
 import tw from 'twrnc';
 import { supabase } from '../lib/supabase';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -88,7 +88,17 @@ documenting your thoughts, memories, and daily experiences. Your story starts he
         </View>
       </View>
       <TouchableOpacity disabled={loading} onPress={() => signUpWithEmail()} style={tw`mb-6 rounded-xl bg-blue-600 px-8 py-3`}>
+      {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+
+          ) : (
+            <>
         <Text style={tw`font-medium text-white text-center`}>Sign Up</Text>
+              
+            </>
+          )}
+      
+      
       </TouchableOpacity>
       <Text>
        Have an account?
