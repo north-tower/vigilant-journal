@@ -5,7 +5,19 @@ import { Button, Input } from '@rneui/themed'
 import { Session } from '@supabase/supabase-js'
 import Avatar from './Avatar'
 
-export default function Account({ session }: { session: Session }) {
+export default function Account() {
+  const [session, setSession] = useState<Session | null>(null)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
   const [website, setWebsite] = useState('')

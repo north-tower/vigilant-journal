@@ -80,10 +80,11 @@ function But() {
       <TouchableOpacity disabled={loading} onPress={() => signInWithEmail()} style={tw`mb-6 rounded-xl bg-blue-600 px-8 py-3`}>
         <Text style={tw`font-medium text-white text-center`}>Log in</Text>
       </TouchableOpacity>
-      {/* <Text>
-        By signing up you are agreeing to our{' '}
-        <Text style={tw`whitespace-nowrap font-medium text-gray-900 hover:underline`}>Terms and Conditions</Text>
-      </Text> */}
+      <Text>
+        New to the app?
+        <Text style={tw`whitespace-nowrap font-medium text-gray-900 hover:underline`}>
+          Sign Up</Text>
+      </Text>
     </View>
   );
 }
