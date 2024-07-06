@@ -4,6 +4,7 @@ import { Searchbar } from 'react-native-paper';
 import tw from 'twrnc';
 import Nav from './Nav';
 import J from './J';
+import Categories from './Categories';
 
 const Home = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -15,7 +16,7 @@ const Home = () => {
       value={searchQuery}
     />
 
-    <J />
+    <Categories />
     <Nav />
     </SafeAreaView>
   )
