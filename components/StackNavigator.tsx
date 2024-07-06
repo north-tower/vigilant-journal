@@ -36,7 +36,10 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator>
       {session && session.user ? (
-        <Stack.Screen
+        <>
+  
+
+         <Stack.Screen
           name="Account"
           component={Account}
       
@@ -44,6 +47,8 @@ const StackNavigator = () => {
             headerShown: false,
           }}
         />
+        </>
+       
       ) : (
         <>
         <Stack.Screen name="Signin" component={But} options={{
@@ -52,7 +57,10 @@ const StackNavigator = () => {
           <Stack.Screen name="Signup" component={SignUp} options={{
             headerShown: false,
           }} />
-           <Stack.Screen name="Success" component={Success} />
+
+<Stack.Screen name="Success" component={Success} />   
+                
+           
         </>
         
       )}
