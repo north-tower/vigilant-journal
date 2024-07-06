@@ -8,12 +8,14 @@ import Account from './Account';
 import But from './But';
 import SignUp from './SignUp';
 import Success from './Success';
+import Home from './Home';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
     Signup: undefined;
     Signin: undefined;
     Success: undefined;
+    Home: undefined;
   };
 
 
@@ -40,8 +42,8 @@ const StackNavigator = () => {
   
 
          <Stack.Screen
-          name="Account"
-          component={Account}
+          name="Home"
+          component={Home}
       
           options={{
             headerShown: false,
