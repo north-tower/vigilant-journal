@@ -81,7 +81,7 @@ function But() {
             secureTextEntry={true}
           /> */}
               <TextInput
-      label="Email"  placeholderTextColor="black"
+      label="Password"  placeholderTextColor="black"
       onChangeText={(text) => setPassword(text)}
       value={password}
       secureTextEntry={true}

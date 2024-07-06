@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, AppState, Alert, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, AppState, Alert,  ActivityIndicator } from 'react-native';
 import tw from 'twrnc';
 import { supabase } from '../lib/supabase';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from './StackNavigator';
+import { TextInput } from 'react-native-paper';
 
 AppState.addEventListener('change', (state) => {
   if (state === 'active') {
@@ -50,24 +51,28 @@ function SignUp() {
       </Text>
       <View style={tw`mb-6`}>
         <View style={tw`focus-within:border-b-blue-500 relative mb-3 flex overflow-hidden border-b-2 transition`}>
-          <TextInput
+          {/* <TextInput
             style={tw`w-full flex-1 border-blue-300 bg-white px-4 py-2 text-base text-gray-700 focus:outline-none`}
             placeholder="Email"
             placeholderTextColor="black"
             keyboardType="email-address"
             onChangeText={(text) => setEmail(text)}
             value={email}
-          />
+          /> */}
+                <TextInput
+      label="Email"  placeholderTextColor="black"
+      onChangeText={(text) => setEmail(text)}
+      value={email}
+    />
+          
         </View>
         <View style={tw`focus-within:border-b-blue-500 relative mb-3 flex overflow-hidden border-b-2 transition`}>
-          <TextInput
-            style={tw`w-full flex-1 border-blue-300 bg-white px-4 py-2 text-base text-gray-700 focus:outline-none`}
-            placeholder="Password"
-            placeholderTextColor="black"
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-            secureTextEntry={true}
-          />
+        <TextInput
+      label="Password"  placeholderTextColor="black"
+      onChangeText={(text) => setPassword(text)}
+      value={password}
+      secureTextEntry={true}
+    />
         </View>
       </View>
       <TouchableOpacity disabled={loading} onPress={signUpWithEmail} style={tw`mb-6 rounded-xl bg-blue-600 px-8 py-3`}>
