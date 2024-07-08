@@ -12,6 +12,7 @@ import Home from './Home';
 import HomeScreen from '../screens/HomeScreen';
 import DemoScreen from '../screens/DemoScreen';
 import Paywall from '../screens/Paywall';
+import JournalScreen from '../screens/JournalScreen';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
@@ -78,6 +79,13 @@ const StackNavigator = () => {
           component={Account}
       
          
+        />
+         <Stack.Screen
+          name="Journal"
+          component={JournalScreen}
+          options={{
+            headerShown: false,
+          }}
         />
         </>
        

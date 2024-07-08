@@ -86,7 +86,7 @@ const HomeScreen = () => {
 
         <ActionRow 
         title="Add Journal"
-        screen="Demo"
+        screen="Journal"
         color="#E5962D"
         icon="fitness"
         vertical
