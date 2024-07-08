@@ -110,7 +110,7 @@ const HomeScreen = () => {
         />
         <ActionRow 
         title="Add a Category"
-        screen="DataTime"
+        screen="Category"
         color="#8AC926"
         icon="add-circle"
         requiresPro

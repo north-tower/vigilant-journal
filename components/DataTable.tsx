@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { TouchableOpacity,Text } from 'react-native';
+import React, { useState,  useEffect } from 'react';
+import { TouchableOpacity,Text, Button, } from 'react-native';
 import { DataTable } from 'react-native-paper';
+import { Modal, Portal, PaperProvider } from 'react-native-paper';
+import Modals from './Modal';
+
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from './StackNavigator';
+import { useNavigation } from '@react-navigation/native';
+
 interface JournalEntry {
   id: number;
   title: string;
@@ -8,7 +15,17 @@ interface JournalEntry {
   category: string;
   date: string; // Assuming date is a string; adjust as per your backend schema
 }
+
+
+export type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Table">;
 const Datatable = () => {
+  const navigation = useNavigation<NavigationProp>();
+
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {backgroundColor: 'white', padding: 20};
   const [page, setPage] = useState<number>(0);
   const [numberOfItemsPerPageList] = useState([5, 10, 15]); // Adjust as needed
   const [itemsPerPage, setItemsPerPage] = useState(numberOfItemsPerPageList[0]);
@@ -120,9 +137,9 @@ const Datatable = () => {
               <Text>Delete</Text>
             </TouchableOpacity>{' '}
             |{' '}
-            <TouchableOpacity onPress={() => editJournalEntry(item.id, { /* updated fields */ })}>
-              <Text>Edit</Text>
-            </TouchableOpacity>
+           
+            <Button title="Open Modal" onPress={() => navigation.navigate('Modal')} />
+          
           </DataTable.Cell>
         </DataTable.Row>
       ))}

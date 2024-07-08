@@ -15,6 +15,8 @@ import Paywall from '../screens/Paywall';
 import JournalScreen from '../screens/JournalScreen';
 import CategoryScreen from '../screens/CategoryScreen';
 import JournalTable from '../screens/JournalTable';
+import JournalTime from '../screens/JournalTime';
+import Modals from './Modal';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
@@ -26,6 +28,9 @@ export type RootStackParamList = {
     Demo: undefined;
     Category: undefined;
     Table: undefined;
+    DataTime: undefined;
+    Modal: undefined;
+
 
 
     
@@ -107,6 +112,15 @@ const StackNavigator = () => {
             headerShown: false,
           }}
         />
+         <Stack.Screen
+          name="DataTime"
+          component={JournalTime}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+<Stack.Screen name="Modal" component={Modals} options={{ presentation: 'modal' }} />
         </>
        
       ) : (
