@@ -94,7 +94,7 @@ const HomeScreen = () => {
 
         <ActionRow 
         title="Browse Journals"
-        screen="Demo"
+        screen="Table"
         color="#1982C4"
         icon="library"
         vertical
@@ -115,7 +115,7 @@ const HomeScreen = () => {
         icon="add-circle"
         requiresPro
         />
-          <ActionRow 
+          {/* <ActionRow 
         title="Create a Routine"
         screen="Demo"
         color="#C03221"
@@ -128,7 +128,7 @@ const HomeScreen = () => {
         color="#23967F"
         icon="trophy"
         requiresPro
-        />
+        /> */}
         </View>
         
     

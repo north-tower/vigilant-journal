@@ -14,6 +14,7 @@ import DemoScreen from '../screens/DemoScreen';
 import Paywall from '../screens/Paywall';
 import JournalScreen from '../screens/JournalScreen';
 import CategoryScreen from '../screens/CategoryScreen';
+import JournalTable from '../screens/JournalTable';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
@@ -24,6 +25,8 @@ export type RootStackParamList = {
     Paywall: undefined;
     Demo: undefined;
     Category: undefined;
+    Table: undefined;
+
 
     
 
@@ -93,6 +96,13 @@ const StackNavigator = () => {
           <Stack.Screen
           name="Category"
           component={CategoryScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name="Table"
+          component={JournalTable}
           options={{
             headerShown: false,
           }}

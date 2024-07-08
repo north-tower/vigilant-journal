@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Platform, KeyboardAvoidingView, Alert } from 'react-native';
@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { TextInput, Button } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { RootStackParamList } from '../components/StackNavigator';
+import { Checkbox } from 'react-native-paper';
 
 export type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Demo">;
 
@@ -17,6 +18,26 @@ const JournalScreen = () => {
   const [category, setCategory] = useState('');
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [checked, setChecked] = React.useState(false);
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('https://postgres-js.vercel.app/getCategory');
+      if (response.ok) {
+        const data = await response.json();
+        setCategories(data.map((category: any) => category.category)); // Assuming category objects have a 'name' field
+      } else {
+        Alert.alert('Error', 'Failed to fetch categories');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'An error occurred while fetching categories');
+    }
+  };
 
   const onChangeDate = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
@@ -91,6 +112,8 @@ const JournalScreen = () => {
                 underlineColor="white"
                 activeUnderlineColor="white"
               />
+               
+           
               <TouchableOpacity onPress={() => setShowDatePicker(true)} style={tw`mb-4 bg-[#E5962D]`}>
                 <TextInput
                   label="Date"
