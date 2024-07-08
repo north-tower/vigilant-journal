@@ -102,15 +102,15 @@ const HomeScreen = () => {
         </View>
         
 
-        <ActionRow 
+        {/* <ActionRow 
         title="Connect with Friends"
         screen="Account"
         color="#F44174"
         icon="share-social"
-        />
+        /> */}
         <ActionRow 
         title="Add a Category"
-        screen="Demo"
+        screen="Category"
         color="#8AC926"
         icon="add-circle"
         requiresPro

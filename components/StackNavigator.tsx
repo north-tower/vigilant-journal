@@ -13,6 +13,7 @@ import HomeScreen from '../screens/HomeScreen';
 import DemoScreen from '../screens/DemoScreen';
 import Paywall from '../screens/Paywall';
 import JournalScreen from '../screens/JournalScreen';
+import CategoryScreen from '../screens/CategoryScreen';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
@@ -22,6 +23,8 @@ export type RootStackParamList = {
     Home: undefined;
     Paywall: undefined;
     Demo: undefined;
+    Category: undefined;
+
     
 
 
@@ -83,6 +86,13 @@ const StackNavigator = () => {
          <Stack.Screen
           name="Journal"
           component={JournalScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name="Category"
+          component={CategoryScreen}
           options={{
             headerShown: false,
           }}
