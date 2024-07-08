@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
-  View, Text, SafeAreaView, TouchableOpacity, ScrollView, Platform, KeyboardAvoidingView, Alert, StyleSheet,
+  View, Text, SafeAreaView, TouchableOpacity, ScrollView, Platform, KeyboardAvoidingView, Alert, StyleSheet, ActivityIndicator,
 } from 'react-native';
 import tw from 'twrnc';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,13 +13,6 @@ import { Dropdown } from 'react-native-element-dropdown';
 
 export type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Demo'>;
 
-
-interface Category {
-  label: string;
-  value: string;
-}
-
-
 const JournalScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const [title, setTitle] = useState('');
@@ -27,8 +20,9 @@ const JournalScreen: React.FC = () => {
   const [category, setCategory] = useState('');
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
   const [value, setValue] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchCategories();
@@ -36,7 +30,7 @@ const JournalScreen: React.FC = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('https://postgres-js.vercel.app/getCategory');
+      const response = await fetch('https://postgres-js.vercel.app/category');
       if (response.ok) {
         const data = await response.json();
         const formattedCategories = data.map((cat: any) => ({ label: cat.category, value: cat.category }));
@@ -56,6 +50,7 @@ const JournalScreen: React.FC = () => {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     try {
       const response = await fetch('https://postgres-js.vercel.app/journal', {
         method: 'POST',
@@ -78,6 +73,8 @@ const JournalScreen: React.FC = () => {
       }
     } catch (error) {
       Alert.alert('Error', 'An error occurred while saving the journal entry');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -103,6 +100,7 @@ const JournalScreen: React.FC = () => {
                 style={tw`mb-4 bg-[#E5962D] text-white`}
                 underlineColor="white"
                 activeUnderlineColor="white"
+                theme={{ colors: { text: 'white', placeholder: 'white', background: '#E5962D' } }}
               />
               <TextInput
                 label="Content"
@@ -113,6 +111,7 @@ const JournalScreen: React.FC = () => {
                 style={tw`mb-4 bg-[#E5962D] text-white`}
                 underlineColor="white"
                 activeUnderlineColor="white"
+                theme={{ colors: { text: 'white', placeholder: 'white', background: '#E5962D' } }}
               />
               <Dropdown
                 style={styles.dropdown}
@@ -132,7 +131,7 @@ const JournalScreen: React.FC = () => {
                   setValue(item.value);
                 }}
                 renderLeftIcon={() => (
-                  <Ionicons name="list" size={24} color="#E5962D" />
+                  <Ionicons name="list" size={24} color="white" />
                 )}
               />
               <TouchableOpacity onPress={() => setShowDatePicker(true)} style={tw`mb-4 bg-[#E5962D]`}>
@@ -143,6 +142,7 @@ const JournalScreen: React.FC = () => {
                   style={tw`bg-[#E5962D] text-white`}
                   underlineColor="white"
                   activeUnderlineColor="white"
+                  theme={{ colors: { text: 'white', placeholder: 'white', background: '#E5962D' } }}
                 />
               </TouchableOpacity>
               {showDatePicker && (
@@ -154,8 +154,12 @@ const JournalScreen: React.FC = () => {
                 />
               )}
             </View>
-            <Button mode="contained" onPress={handleSubmit} style={tw`bg-white`}>
-              <Text style={tw`text-[#E5962D]`}>Save Entry</Text>
+            <Button mode="contained" onPress={handleSubmit} style={tw`bg-white`} disabled={loading}>
+              {loading ? (
+                <ActivityIndicator size="small" color="#E5962D" />
+              ) : (
+                <Text style={tw`text-[#E5962D]`}>Save Entry</Text>
+              )}
             </Button>
           </View>
         </ScrollView>
