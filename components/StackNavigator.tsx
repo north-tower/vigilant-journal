@@ -17,6 +17,7 @@ import CategoryScreen from '../screens/CategoryScreen';
 import JournalTable from '../screens/JournalTable';
 import JournalTime from '../screens/JournalTime';
 import Modals from './Modal';
+import EditModal from './Modal';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
@@ -120,7 +121,9 @@ const StackNavigator = () => {
           }}
         />
 
-<Stack.Screen name="Modal" component={Modals} options={{ presentation: 'modal' }} />
+<Stack.Screen name="Modal" component={EditModal} options={{
+            headerShown: false,
+  presentation: 'modal' }} />
         </>
        
       ) : (

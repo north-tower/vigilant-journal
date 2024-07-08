@@ -1,49 +1,29 @@
-import React, { useState,  useEffect } from 'react';
-import { TouchableOpacity,Text, Button, } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { TouchableOpacity, Text } from 'react-native';
 import { DataTable } from 'react-native-paper';
-import { Modal, Portal, PaperProvider } from 'react-native-paper';
-import Modals from './Modal';
-
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from './StackNavigator';
-import { useNavigation } from '@react-navigation/native';
 
 interface JournalEntry {
   id: number;
   title: string;
   content: string;
   category: string;
-  date: string; // Assuming date is a string; adjust as per your backend schema
+  date: string;
 }
 
+export type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Table'>;
 
-export type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Table">;
-const Datatable = () => {
+const Datatable: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
 
-  const [visible, setVisible] = React.useState(false);
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: 'white', padding: 20};
   const [page, setPage] = useState<number>(0);
   const [numberOfItemsPerPageList] = useState([5, 10, 15]); // Adjust as needed
   const [itemsPerPage, setItemsPerPage] = useState(numberOfItemsPerPageList[0]);
-  const [items, setItems] = useState<any[]>([]); // Initialize with empty array
+  const [items, setItems] = useState<JournalEntry[]>([]); // Initialize with empty array
   const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
-  const handleEdit = (entry: JournalEntry) => {
-    setSelectedEntry(entry); // Set the selected entry to open the modal
-  };
 
-  const handleSave = (updatedEntry: JournalEntry) => {
-    // Implement logic to update the entry using API
-    console.log('Updated Entry:', updatedEntry);
-    // Ideally, update the state or make API call to update the backend
-  };
-
-  const handleCloseModal = () => {
-    setSelectedEntry(null); // Clear selected entry to close the modal
-  };
   // Example API endpoint URLs
   const apiUrl = 'https://postgres-js.vercel.app/journal';
 
@@ -91,31 +71,6 @@ const Datatable = () => {
     }
   };
 
-  // Function to edit a journal entry
-  const editJournalEntry = async (id: number, updatedData: any) => {
-    try {
-      const response = await fetch(`${apiUrl}/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      });
-      if (response.ok) {
-        // Update items state after edit
-        const updatedItems = items.map(item =>
-          item.id === id ? { ...item, ...updatedData } : item
-        );
-        setItems(updatedItems);
-        console.log('Journal entry updated successfully');
-      } else {
-        console.error('Failed to update journal entry');
-      }
-    } catch (error) {
-      console.error('Error updating journal entry:', error);
-    }
-  };
-
   return (
     <DataTable>
       <DataTable.Header>
@@ -126,7 +81,7 @@ const Datatable = () => {
         <DataTable.Title numeric>Actions</DataTable.Title>
       </DataTable.Header>
 
-      {items.map(item => (
+      {items.slice(from, to).map(item => (
         <DataTable.Row key={item.id}>
           <DataTable.Cell>{item.title}</DataTable.Cell>
           <DataTable.Cell numeric>{item.content}</DataTable.Cell>
@@ -137,9 +92,9 @@ const Datatable = () => {
               <Text>Delete</Text>
             </TouchableOpacity>{' '}
             |{' '}
-           
-            <Button title="Open Modal" onPress={() => navigation.navigate('Modal')} />
-          
+            <TouchableOpacity onPress={() => navigation.navigate('Modal')}>
+              <Text>Edit</Text>
+            </TouchableOpacity>
           </DataTable.Cell>
         </DataTable.Row>
       ))}
