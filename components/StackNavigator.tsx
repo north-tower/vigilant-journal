@@ -77,9 +77,7 @@ const StackNavigator = () => {
           name="Account"
           component={Account}
       
-          options={{
-            headerShown: false,
-          }}
+         
         />
         </>
        

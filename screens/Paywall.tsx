@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native'
 import React from 'react'
 import tw from 'twrnc';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -17,7 +17,9 @@ const Paywall = () => {
   const navigation = useNavigation<NavigationProp>();
 
   return (
-    <ScrollView style={tw`bg-[#1A2F44] flex-1`}>
+
+
+    <SafeAreaView style={tw`bg-[#1A2F44] flex-1`}>
     <View style={tw`m-10 space-y-2`}>
         <Text style={tw`text-2xl text-center uppercase text-white font-bold`}>
             User Profile
@@ -25,7 +27,7 @@ const Paywall = () => {
        
     </View>
 
-    <TouchableOpacity style={tw`absolute top-0 right-0 p-5`} onPress={navigation.goBack}>
+    <TouchableOpacity style={tw`absolute top-5 right-0 p-5`} onPress={navigation.goBack}>
         <Ionicons name="close-circle-sharp" size={32} color="#E5962D" />
         {/* <Ionicons name="person-circle" size={24} color="#E5962D" /> */}
 
@@ -64,7 +66,7 @@ const Paywall = () => {
 
 
    
-  </ScrollView>
+  </SafeAreaView>
   )
 }
 

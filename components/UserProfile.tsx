@@ -3,9 +3,17 @@ import { View, Text, Image, Alert, Button } from 'react-native';
 import tw from 'twrnc';
 import { supabase } from '../lib/supabase';
 import { Session } from '@supabase/supabase-js';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from './StackNavigator';
+
+export type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Paywall">;
+
 
 const UserProfile = () => {
-    const [session, setSession] = useState<Session | null>(null)
+    const [session, setSession] = useState<Session | null>(null);
+  const navigation = useNavigation<NavigationProp>();
+
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -71,7 +79,7 @@ const UserProfile = () => {
          placeat!</Text>
         <View style={tw`mt-3 divide-y rounded bg-gray-[#E5962D] py-2 px-3 text-gray-600 shadow-sm
              hover:text-gray-700 hover:shadow`}>
-        <Button title="Edit Profile" />
+        <Button title="Edit Profile" onPress={() => navigation.navigate("Account", { session })} />
        
         <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
       
