@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity,Text } from 'react-native';
 import { DataTable } from 'react-native-paper';
-
+interface JournalEntry {
+  id: number;
+  title: string;
+  content: string;
+  category: string;
+  date: string; // Assuming date is a string; adjust as per your backend schema
+}
 const Datatable = () => {
   const [page, setPage] = useState<number>(0);
   const [numberOfItemsPerPageList] = useState([5, 10, 15]); // Adjust as needed
   const [itemsPerPage, setItemsPerPage] = useState(numberOfItemsPerPageList[0]);
   const [items, setItems] = useState<any[]>([]); // Initialize with empty array
+  const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
+  const handleEdit = (entry: JournalEntry) => {
+    setSelectedEntry(entry); // Set the selected entry to open the modal
+  };
 
+  const handleSave = (updatedEntry: JournalEntry) => {
+    // Implement logic to update the entry using API
+    console.log('Updated Entry:', updatedEntry);
+    // Ideally, update the state or make API call to update the backend
+  };
+
+  const handleCloseModal = () => {
+    setSelectedEntry(null); // Clear selected entry to close the modal
+  };
   // Example API endpoint URLs
   const apiUrl = 'https://postgres-js.vercel.app/journal';
 

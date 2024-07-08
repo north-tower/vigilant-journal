@@ -75,7 +75,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
      
       <Image 
-        source={{ uri: "https://i.postimg.cc/zB2Hs1SP/e14NE49.png" }} 
+        source={{ uri: "https://cdn.worldvectorlogo.com/logos/jd-journal.svg" }} 
         style={tw`w-full h-64`}
         onLoad={() => console.log('Image loaded')} 
         onError={() => console.log('Image failed to load')} 
