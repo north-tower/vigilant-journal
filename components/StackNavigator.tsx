@@ -11,6 +11,7 @@ import Success from './Success';
 import Home from './Home';
 import HomeScreen from '../screens/HomeScreen';
 import DemoScreen from '../screens/DemoScreen';
+import Paywall from '../screens/Paywall';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
@@ -58,6 +59,14 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Demo"
           component={DemoScreen}
+      
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="Paywall"
+          component={Paywall}
       
           options={{
             headerShown: false,

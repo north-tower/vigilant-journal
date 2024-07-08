@@ -1,17 +1,67 @@
-import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import tw from 'twrnc'
 import { Ionicons } from '@expo/vector-icons'
 import ActionRow from '../components/ActionRow'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../components/StackNavigator'
 import { useNavigation } from '@react-navigation/native'
+import { Session } from '@supabase/supabase-js'
+import { supabase } from '../lib/supabase'
 
 export type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 
 
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp>();
+  const [session, setSession] = useState<Session | null>(null)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
+  const [loading, setLoading] = useState(true)
+  const [username, setUsername] = useState('')
+  const [website, setWebsite] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState('')
+
+  useEffect(() => {
+    if (session) getProfile()
+  }, [session])
+
+  async function getProfile() {
+    try {
+      setLoading(true)
+      if (!session?.user) throw new Error('No user on the session!')
+
+      const { data, error, status } = await supabase
+        .from('profiles')
+        .select(`username, website, avatar_url`)
+        .eq('id', session?.user.id)
+        .single()
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        setUsername(data.username)
+        setWebsite(data.website)
+        setAvatarUrl(data.avatar_url)
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <SafeAreaView style={tw`flex-1 bg-gray-100 relative`}> 
@@ -21,7 +71,7 @@ const HomeScreen = () => {
         
         style={tw`absolute z-50 top-5 right-10 items-center`}>
             <Ionicons name="person-circle" size={24} color="#E5962D" />
-            <Text style={tw`text-center text-[#E5962D]`}>User</Text>
+            <Text style={tw`text-center text-[#E5962D]`}>{username}</Text>
         </TouchableOpacity>
      
       <Image 
