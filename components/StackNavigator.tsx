@@ -9,6 +9,7 @@ import But from './But';
 import SignUp from './SignUp';
 import Success from './Success';
 import Home from './Home';
+import HomeScreen from '../screens/HomeScreen';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
@@ -16,6 +17,8 @@ export type RootStackParamList = {
     Signin: undefined;
     Success: undefined;
     Home: undefined;
+    Paywall: undefined;
+
   };
 
 
@@ -43,7 +46,7 @@ const StackNavigator = () => {
 
          <Stack.Screen
           name="Home"
-          component={Home}
+          component={HomeScreen}
       
           options={{
             headerShown: false,
