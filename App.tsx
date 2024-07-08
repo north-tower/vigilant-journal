@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native"
 import StackNavigator from './components/StackNavigator'
-
+import { PaperProvider } from 'react-native-paper';
 export default function App() {
   
 
@@ -11,8 +11,14 @@ export default function App() {
       //    <Account key={session.user.id} 
       //    session={session} /> : <But />}
       // </View>
-      <NavigationContainer>
+     
+
+<NavigationContainer>
+
          <StackNavigator />     
+     
+
       </NavigationContainer>
+     
   )
 }

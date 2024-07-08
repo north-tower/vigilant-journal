@@ -5,6 +5,7 @@ import tw from 'twrnc';
 import Nav from './Nav';
 import J from './J';
 import Categories from './Categories';
+import Datatable from './DataTable';
 
 const Home = () => {
     const [searchQuery, setSearchQuery] = React.useState('');
@@ -16,7 +17,10 @@ const Home = () => {
       value={searchQuery}
     />
 
-    <Categories />
+
+
+
+<Datatable />
     <Nav />
     </SafeAreaView>
   )
