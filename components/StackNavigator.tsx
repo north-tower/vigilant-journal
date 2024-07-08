@@ -18,6 +18,8 @@ export type RootStackParamList = {
     Success: undefined;
     Home: undefined;
     Paywall: undefined;
+    Demo: undefined;
+
 
   };
 
