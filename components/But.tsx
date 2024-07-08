@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert,  AppState, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, Alert,  AppState, SafeAreaView, ActivityIndicator } from 'react-native';
 import tw from 'twrnc';
 import { supabase } from '../lib/supabase';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
@@ -89,7 +89,11 @@ function But() {
         </View>
      </View>
       <TouchableOpacity disabled={loading} onPress={signInWithEmail} style={tw`mb-6 rounded-xl bg-blue-600 px-8 py-3`}>
-        <Text style={tw`font-medium text-white text-center`}>Log in</Text>
+      {loading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
+          <Text style={tw`font-medium text-white text-center`}>Sign In</Text>
+        )}
       </TouchableOpacity>
       <Text>
         New to the app?{' '}

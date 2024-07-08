@@ -93,7 +93,7 @@ const HomeScreen = () => {
         />
 
         <ActionRow 
-        title="Browse Workouts"
+        title="Browse Journals"
         screen="Demo"
         color="#1982C4"
         icon="library"
@@ -109,7 +109,7 @@ const HomeScreen = () => {
         icon="share-social"
         />
         <ActionRow 
-        title="Add an Exercise"
+        title="Add a Category"
         screen="Demo"
         color="#8AC926"
         icon="add-circle"

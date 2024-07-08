@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Platform, KeyboardAvoidingView } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView, Platform, KeyboardAvoidingView, Alert } from 'react-native';
 import tw from 'twrnc';
 import { Ionicons } from '@expo/vector-icons';
 import { TextInput, Button } from 'react-native-paper';
@@ -22,6 +22,32 @@ const JournalScreen = () => {
     const currentDate = selectedDate || date;
     setShowDatePicker(Platform.OS === 'ios');
     setDate(currentDate);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('https://postgres-js.vercel.app/journal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title,
+          content,
+          category,
+          date: date.toISOString().split('T')[0] // format the date to 'YYYY-MM-DD'
+        })
+      });
+      const data = await response.json();
+      if (response.ok) {
+        Alert.alert('Success', 'Journal entry saved successfully!');
+        navigation.goBack();
+      } else {
+        Alert.alert('Error', data.message || 'An error occurred');
+      }
+    } catch (error) {
+      Alert.alert('Error' || 'An error occurred');
+    }
   };
 
   return (
@@ -84,7 +110,7 @@ const JournalScreen = () => {
                 />
               )}
             </View>
-            <Button mode="contained" onPress={() => {}} style={tw`bg-white`}>
+            <Button mode="contained" onPress={handleSubmit} style={tw`bg-white`}>
               <Text style={tw`text-[#E5962D]`}>Save Entry</Text>
             </Button>
           </View>
