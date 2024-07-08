@@ -6,6 +6,7 @@ import { RootStackParamList } from '../components/StackNavigator';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import UserProfile from '../components/UserProfile';
 
 
 
@@ -19,11 +20,9 @@ const Paywall = () => {
     <ScrollView style={tw`bg-[#1A2F44] flex-1`}>
     <View style={tw`m-10 space-y-2`}>
         <Text style={tw`text-2xl text-center uppercase text-white font-bold`}>
-            upgrade
+            User Profile
         </Text>
-        <Text style={tw`text-center text-white`}>
-            Upgrade to Pro
-        </Text>
+       
     </View>
 
     <TouchableOpacity style={tw`absolute top-0 right-0 p-5`} onPress={navigation.goBack}>
@@ -32,7 +31,7 @@ const Paywall = () => {
 
     </TouchableOpacity>
 
-    <View style={tw`items-center`}>
+    {/* <View style={tw`items-center`}>
       <MaterialCommunityIcons name='trophy-award' size={150} color="#E5962D" />
     </View>
 
@@ -60,11 +59,11 @@ const Paywall = () => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, laborum, officia iste, quo adipisci porro cupiditate explicabo sequi accusamus accusantium excepturi maiores laudantium expedita commodi ducimus repellat reprehenderit vitae voluptatem?
           </Text>
         </View>
-      </View>
-      
+      </View> */}
+      <UserProfile />
 
 
-    </View>
+   
   </ScrollView>
   )
 }
