@@ -102,15 +102,15 @@ const HomeScreen = () => {
         </View>
         
 
-        {/* <ActionRow 
-        title="Connect with Friends"
-        screen="Account"
+        <ActionRow 
+        title="Browse journals with timeframes"
+        screen="DataTime"
         color="#F44174"
         icon="share-social"
-        /> */}
+        />
         <ActionRow 
         title="Add a Category"
-        screen="Category"
+        screen="DataTime"
         color="#8AC926"
         icon="add-circle"
         requiresPro
