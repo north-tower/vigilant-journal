@@ -21,6 +21,7 @@ export type RootStackParamList = {
     Home: undefined;
     Paywall: undefined;
     Demo: undefined;
+    
 
 
   };
@@ -67,6 +68,14 @@ const StackNavigator = () => {
          <Stack.Screen
           name="Paywall"
           component={Paywall}
+      
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name="Account"
+          component={Account}
       
           options={{
             headerShown: false,
