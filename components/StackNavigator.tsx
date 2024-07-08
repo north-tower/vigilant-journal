@@ -10,6 +10,7 @@ import SignUp from './SignUp';
 import Success from './Success';
 import Home from './Home';
 import HomeScreen from '../screens/HomeScreen';
+import DemoScreen from '../screens/DemoScreen';
 
 export type RootStackParamList = {
     Account: { session: Session | null };
@@ -49,6 +50,14 @@ const StackNavigator = () => {
          <Stack.Screen
           name="Home"
           component={HomeScreen}
+      
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Demo"
+          component={DemoScreen}
       
           options={{
             headerShown: false,
