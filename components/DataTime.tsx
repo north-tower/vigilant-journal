@@ -3,6 +3,9 @@ import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import { DataTable } from 'react-native-paper';
 import DatePicker from 'react-native-date-picker';
 import { format } from 'date-fns';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from './StackNavigator';
 
 interface JournalEntry {
   id: number;
@@ -11,6 +14,7 @@ interface JournalEntry {
   category: string;
   date: string; // Assuming date is a string; adjust as per your backend schema
 }
+export type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'DataTime'>;
 
 const DataTime = () => {
   const [page, setPage] = useState<number>(0);
@@ -22,6 +26,7 @@ const DataTime = () => {
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [openStartDatePicker, setOpenStartDatePicker] = useState(false);
   const [openEndDatePicker, setOpenEndDatePicker] = useState(false);
+  const navigation = useNavigation<NavigationProp>();
 
   const apiUrl = 'https://postgres-js.vercel.app/journal';
 
@@ -69,28 +74,8 @@ const DataTime = () => {
     }
   };
 
-  const editJournalEntry = async (id: number, updatedData: any) => {
-    try {
-      const response = await fetch(`${apiUrl}/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      });
-      if (response.ok) {
-        // Update items state after edit
-        const updatedItems = items.map(item =>
-          item.id === id ? { ...item, ...updatedData } : item
-        );
-        setItems(updatedItems);
-        console.log('Journal entry updated successfully');
-      } else {
-        console.error('Failed to update journal entry');
-      }
-    } catch (error) {
-      console.error('Error updating journal entry:', error);
-    }
+  const handleEdit = (JournalEntry: JournalEntry) => {
+    navigation.navigate('Modal', { JournalEntry });
   };
 
   return (
@@ -128,34 +113,34 @@ const DataTime = () => {
         />
       </View>
       <DataTable>
-        <DataTable.Header>
-          <DataTable.Title>Title</DataTable.Title>
-          <DataTable.Title numeric>Content</DataTable.Title>
-          <DataTable.Title numeric>Category</DataTable.Title>
-          <DataTable.Title numeric>Date</DataTable.Title>
-          <DataTable.Title numeric>Actions</DataTable.Title>
-        </DataTable.Header>
+      <DataTable.Header>
+        <DataTable.Title>Title</DataTable.Title>
+        <DataTable.Title numeric>Content</DataTable.Title>
+        <DataTable.Title numeric>Category</DataTable.Title>
+        <DataTable.Title numeric>Date</DataTable.Title>
+        <DataTable.Title numeric>Actions</DataTable.Title>
+      </DataTable.Header>
 
-        {items.map(item => (
-          <DataTable.Row key={item.id}>
-            <DataTable.Cell>{item.title}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.content}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.category}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.date}</DataTable.Cell>
-            <DataTable.Cell numeric>
-              <TouchableOpacity onPress={() => deleteJournalEntry(item.id)}>
-                <Text>Delete</Text>
-              </TouchableOpacity>{' '}
-              |{' '}
-              <TouchableOpacity onPress={() => editJournalEntry(item.id, { /* updated fields */ })}>
-                <Text>Edit</Text>
-              </TouchableOpacity>
-            </DataTable.Cell>
-          </DataTable.Row>
-        ))}
+      {items.map(item => (
+        <DataTable.Row key={item.id}>
+          <DataTable.Cell>{item.title}</DataTable.Cell>
+          <DataTable.Cell numeric>{item.content}</DataTable.Cell>
+          <DataTable.Cell numeric>{item.category}</DataTable.Cell>
+          <DataTable.Cell numeric>{item.date}</DataTable.Cell>
+          <DataTable.Cell numeric>
+            <TouchableOpacity onPress={() => deleteJournalEntry(item.id)}>
+              <Text>Delete</Text>
+            </TouchableOpacity>{' '}
+            |{' '}
+            <TouchableOpacity onPress={() => handleEdit(item)}>
+              <Text>Edit</Text>
+            </TouchableOpacity>
+          </DataTable.Cell>
+        </DataTable.Row>
+      ))}
 
-        
-      </DataTable>
+      {/* Example Pagination */}
+    </DataTable>
     </View>
   );
 };

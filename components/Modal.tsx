@@ -111,9 +111,7 @@ const Modals = () => {
           </ScrollView>
         </KeyboardAvoidingView>
 
-        {/* <View style={styles.modalContent}>
-          <Button title="Close Modal" onPress={() => navigation.goBack()} />
-        </View> */}
+ 
       </Modal>
     </SafeAreaView>
   );

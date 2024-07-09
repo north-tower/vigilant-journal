@@ -99,9 +99,7 @@ export default function Account() {
       <View style={styles.verticallySpaced}>
         <Input label="Username" value={username || ''} onChangeText={(text) => setUsername(text)} />
       </View>
-      {/* <View style={styles.verticallySpaced}>
-        <Input label="Website" value={website || ''} onChangeText={(text) => setWebsite(text)} />
-      </View> */}
+  
       <View>
       <Avatar
         size={200}
