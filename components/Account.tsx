@@ -21,14 +21,15 @@ export default function Account() {
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
   const [website, setWebsite] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
   useEffect(() => {
     if (session) getProfile()
   }, [session])
 
   async function getProfile() {
-    try {
+    try { const [newPassword, setNewPassword] = useState('');
       setLoading(true)
       if (!session?.user) throw new Error('No user on the session!')
 
