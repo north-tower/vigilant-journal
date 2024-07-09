@@ -18,7 +18,16 @@ import JournalTable from '../screens/JournalTable';
 import JournalTime from '../screens/JournalTime';
 import Modals from './Modal';
 import EditModal from './Modal';
+import Modal from './Modal';
 
+
+interface JournalEntry {
+  id: number;
+  title: string;
+  content: string;
+  category: string;
+  date: string;
+}
 export type RootStackParamList = {
     Account: { session: Session | null };
     Signup: undefined;
@@ -30,16 +39,8 @@ export type RootStackParamList = {
     Category: undefined;
     Table: undefined;
     DataTime: undefined;
-    Modal: undefined;
-
-
-
-    
-
-
+    Modal: { JournalEntry: JournalEntry}
   };
-
-
 
 const Stack = createNativeStackNavigator();
 
@@ -60,8 +61,6 @@ const StackNavigator = () => {
     <Stack.Navigator>
       {session && session.user ? (
         <>
-  
-
          <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -121,7 +120,7 @@ const StackNavigator = () => {
           }}
         />
 
-<Stack.Screen name="Modal" component={EditModal} options={{
+<Stack.Screen name="Modal" component={Modals} options={{
             headerShown: false,
   presentation: 'modal' }} />
         </>

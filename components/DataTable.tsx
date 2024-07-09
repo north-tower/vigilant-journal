@@ -13,6 +13,10 @@ interface JournalEntry {
   date: string;
 }
 
+interface ChildComponentProps {
+  message: string;
+}
+
 export type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Table'>;
 
 const Datatable: React.FC = () => {
@@ -23,6 +27,9 @@ const Datatable: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState(numberOfItemsPerPageList[0]);
   const [items, setItems] = useState<JournalEntry[]>([]); // Initialize with empty array
   const [selectedEntry, setSelectedEntry] = useState<JournalEntry | null>(null);
+  const handleEdit = (JournalEntry: JournalEntry) => {
+    navigation.navigate('Modal', { JournalEntry });
+  };
 
   // Example API endpoint URLs
   const apiUrl = 'https://postgres-js.vercel.app/journal';
@@ -92,7 +99,7 @@ const Datatable: React.FC = () => {
               <Text>Delete</Text>
             </TouchableOpacity>{' '}
             |{' '}
-            <TouchableOpacity onPress={() => navigation.navigate('Modal')}>
+            <TouchableOpacity onPress={() => handleEdit(item)}>
               <Text>Edit</Text>
             </TouchableOpacity>
           </DataTable.Cell>
