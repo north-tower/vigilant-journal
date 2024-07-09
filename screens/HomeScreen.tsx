@@ -15,6 +15,9 @@ export type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Home
 const HomeScreen = () => {
   const navigation = useNavigation<NavigationProp>();
   const [session, setSession] = useState<Session | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [username, setUsername] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState('')
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -26,10 +29,6 @@ const HomeScreen = () => {
     })
   }, [])
 
-  const [loading, setLoading] = useState(true)
-  const [username, setUsername] = useState('')
-  const [website, setWebsite] = useState('')
-  const [avatarUrl, setAvatarUrl] = useState('')
 
   useEffect(() => {
     if (session) getProfile()
@@ -51,7 +50,6 @@ const HomeScreen = () => {
 
       if (data) {
         setUsername(data.username)
-        setWebsite(data.website)
         setAvatarUrl(data.avatar_url)
       }
     } catch (error) {
@@ -69,18 +67,13 @@ const HomeScreen = () => {
         <TouchableOpacity 
         onPress={() => navigation.navigate("Paywall")}
         
-        style={tw`absolute z-50 top-5 right-10 items-center`}>
+        style={tw`absolute z-50 top-5 right-10 items-center mb-6`}>
             <Ionicons name="person-circle" size={24} color="#E5962D" />
             <Text style={tw`text-center text-[#E5962D]`}>{username}</Text>
         </TouchableOpacity>
      
-      <Image 
-        source={{ uri: "https://cdn.worldvectorlogo.com/logos/jd-journal.svg" }} 
-        style={tw`w-full h-64`}
-        onLoad={() => console.log('Image loaded')} 
-        onError={() => console.log('Image failed to load')} 
-        />
-        <View style={tw`mx-5`}>
+    
+        <View style={tw`mx-5 pt-15`}>
         <View style={tw`flex-row justify-between space-x-2`}>
 
 
@@ -88,33 +81,34 @@ const HomeScreen = () => {
         title="Add Journal"
         screen="Journal"
         color="#E5962D"
-        icon="fitness"
+        icon="add-circle-outline"
         vertical
         />
 
-        <ActionRow 
-        title="Browse Journals"
-        screen="Table"
-        color="#1982C4"
-        icon="library"
-        vertical
-        />
-        </View>
         
-
-        <ActionRow 
-        title="Browse journals with timeframes"
-        screen="DataTime"
-        color="#F44174"
-        icon="share-social"
-        />
         <ActionRow 
         title="Add a Category"
         screen="Category"
         color="#8AC926"
         icon="add-circle"
-        requiresPro
+        vertical
         />
+        </View>
+        
+        <ActionRow 
+        title="Browse Journals"
+        screen="Table"
+        color="#1982C4"
+        icon="search-outline"
+        vertical
+        />
+        <ActionRow 
+        title="Browse journals with timeframes"
+        screen="DataTime"
+        color="#F44174"
+        icon="search-circle-outline"
+        />
+       
           {/* <ActionRow 
         title="Create a Routine"
         screen="Demo"

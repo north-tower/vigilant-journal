@@ -5,7 +5,7 @@ import { Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import Account from './Account';
 
-import But from './But';
+import But from './SignIn';
 import SignUp from './SignUp';
 import Success from './Success';
 import Home from './Home';
@@ -19,6 +19,7 @@ import JournalTime from '../screens/JournalTime';
 import Modals from './Modal';
 import EditModal from './Modal';
 import Modal from './Modal';
+import SignIn from './SignIn';
 
 
 interface JournalEntry {
@@ -127,7 +128,7 @@ const StackNavigator = () => {
        
       ) : (
         <>
-        <Stack.Screen name="Signin" component={But} options={{
+        <Stack.Screen name="Signin" component={SignIn} options={{
             headerShown: false,
           }} />
           <Stack.Screen name="Signup" component={SignUp} options={{

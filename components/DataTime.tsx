@@ -25,20 +25,7 @@ const DataTime = () => {
 
   const apiUrl = 'https://postgres-js.vercel.app/journal';
 
-  const handleEdit = (entry: JournalEntry) => {
-    setSelectedEntry(entry); // Set the selected entry to open the modal
-  };
-
-  const handleSave = (updatedEntry: JournalEntry) => {
-    // Implement logic to update the entry using API
-    console.log('Updated Entry:', updatedEntry);
-    // Ideally, update the state or make API call to update the backend
-  };
-
-  const handleCloseModal = () => {
-    setSelectedEntry(null); // Clear selected entry to close the modal
-  };
-
+  
   const fetchJournalEntries = async () => {
     try {
       let url = apiUrl;
@@ -63,12 +50,7 @@ const DataTime = () => {
     fetchJournalEntries(); // Fetch data when component mounts or when dates change
   }, [startDate, endDate]);
 
-  useEffect(() => {
-    setPage(0); // Reset page to 0 when itemsPerPage changes
-  }, [itemsPerPage]);
 
-  const from = page * itemsPerPage;
-  const to = Math.min((page + 1) * itemsPerPage, items.length);
 
   const deleteJournalEntry = async (id: number) => {
     try {
@@ -154,7 +136,7 @@ const DataTime = () => {
           <DataTable.Title numeric>Actions</DataTable.Title>
         </DataTable.Header>
 
-        {items.slice(from, to).map(item => (
+        {items.map(item => (
           <DataTable.Row key={item.id}>
             <DataTable.Cell>{item.title}</DataTable.Cell>
             <DataTable.Cell numeric>{item.content}</DataTable.Cell>
@@ -172,7 +154,7 @@ const DataTime = () => {
           </DataTable.Row>
         ))}
 
-        {/* Example Pagination */}
+        
       </DataTable>
     </View>
   );

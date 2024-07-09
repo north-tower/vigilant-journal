@@ -52,7 +52,7 @@ const CategoryScreen = () => {
           <View style={tw`mx-auto my-10 max-w-md rounded-xl bg-[#8AC926] px-4 py-10 shadow-lg sm:px-8`}>
             <Text style={tw`text-white text-2xl font-bold mb-6`}>New Category Entry</Text>
             <Text style={tw`text-white mb-5`}>
-              Record your thoughts, capture your memories, and keep track of your daily experiences. Start a new entry to continue your journey of self-reflection and growth.
+            Begin your entry below. Share your thoughts, experiences, or ideas. Each moment captured is a step in your personal journey
             </Text>
             <View style={tw`mb-6`}>
               <TextInput

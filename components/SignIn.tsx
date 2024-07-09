@@ -14,7 +14,7 @@ AppState.addEventListener('change', (state) => {
   }
 });
 
-function But() {
+function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -114,4 +114,4 @@ function But() {
   );
 }
 
-export default But;
+export default SignIn;
